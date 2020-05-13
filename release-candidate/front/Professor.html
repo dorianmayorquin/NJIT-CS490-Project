@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<meta charset='utf-8' />
+<html>
+  <head>
+    <title>Exam Portal</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="Professor.css" />
+  </head>
+  <body style="margin: 0;">
+    <div class="header-container">
+      <ul id="nav-bar" class="nav">
+        <li class="nav-link" id="home-link"></li>
+        <li class="nav-link" id="question-link">
+          <a
+            href="javascript:;"
+            id="nav-button"
+            onclick="visibilityChange(document.getElementById('questionCreate'));"
+            >Create a Question</a
+          >
+        </li>
+        <li class="nav-link" id="create-link">
+          <a
+            href="javascript:;"
+            id="nav-button"
+            onclick="visibilityChange(document.getElementById('examCreate'));"
+            >Create an Exam</a
+          >
+        </li>
+        <li class="nav-link" id="assign-link">
+          <a
+            href="javascript:;"
+            id="nav-button"
+            onclick="visibilityChange(document.getElementById('examAssign'));"
+            >Assign Exams</a
+          >
+        </li>
+        <li class="nav-link" id="grade-link">
+          <a
+            href="javascript:;"
+            id="nav-button"
+            onclick="visibilityChange(document.getElementById('gradeExam'));"
+            >Grade Exams</a
+          >
+        </li>
+        <li class="nav-link" id="logout-link">
+          <a href="javascript:;" id="nav-button" onclick="logout();">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-form-container" id="questionCreate">
+      <div id="createQuestion">
+      <h2>Create a Question</h2>
+      <div class="question-form">
+        <form id="qForm" method="POST" action="#">
+          <ul class="flex-form" id="testCaseList">
+            <li>
+              <label for="name">Question:</label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Function name"
+              />
+            </li>
+            <li>
+              <label for="description">Description:</label>
+              <textarea
+                id="description"
+                name="description"
+                placeholder="Enter Question Description"
+                rows="4" cols="50"
+              ></textarea>
+            </li>
+            <li>
+              <label for="difficulty">Difficulty:</label>
+              <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </li>
+            <li>
+              <label for="category">Category:</label>
+              <select id="category">
+                <option value="lists">Lists</option>
+                <option value="turtles">Turtles</option>
+                <option value="if">If</option>
+                <option value="ForLoops">For Loops</option>
+                <option value="Def">Def</option>
+                <option value="While">While</option>
+                <option value="StringMethods">String Methods</option>
+                <option value="Files">Files</option>
+                <option value="Dictionaries">Dictionaries</option>
+                <option value="Namespaces">Namespaces</option>
+                <option value="Exceptions">Exceptions</option>
+                <option value="Classes">Classes</option>
+              </select>
+            </li>
+            <li>
+              <label for="constraint">Constraint:</label>
+              <select id="constraint">
+                <option value="none">None</option>
+                <option value="for">For</option>
+                <option value="while">While</option>
+                <option value="print">Print</option>
+            </select>
+            </li>
+            <li>
+              <label for="testcase1">Test Case 1:</label>
+              <input
+                id="testCaseInput1"
+                type="text"
+                name="input1"
+                placeholder="Input 1"
+              />
+              <input
+                id="testCaseOutput1"
+                type="text"
+                name="output1"
+                placeholder="Output 1"
+              />
+            </li>
+            <li>
+              <label for="testcase2">Test Case 2:</label>
+              <input
+                id="testCaseInput2"
+                type="text"
+                name="input2"
+                placeholder="Input 2"
+              />
+              <input
+                id="testCaseOutput2"
+                type="text"
+                name="output2"
+                placeholder="Output 2"
+              />
+            </li>
+          </ul>
+          <input type="submit" value="Submit" />
+        </form>
+        <button onclick="addcase()">Add Test Case</button>
+        <button onclick="rmcase()">Remove Test Case</button>
+      </div>
+      <div>
+        <span id="insertSuccessText"></span>
+      </div>
+      </div>
+      <div id="filter1">
+
+        <form id="fForm1">
+          <label for="difficultySelect1">Difficulty</label>
+          <select id="difficultySelect1">
+            <option value="none">None</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+          <label for="categorySelect1">Category</label>
+          <select id="categorySelect1">
+            <option value="none">None</option>
+            <option value="lists">Lists</option>
+            <option value="turtles">Turtles</option>
+            <option value="if">If</option>
+            <option value="ForLoops">For Loops</option>
+            <option value="Def">Def</option>
+            <option value="While">While</option>
+            <option value="StringMethods">String Methods</option>
+            <option value="Files">Files</option>
+            <option value="Dictionaries">Dictionaries</option>
+            <option value="Namespaces">Namespaces</option>
+            <option value="Exceptions">Exceptions</option>
+            <option value="Classes">Classes</option>
+          </select>
+          <label for="constraintSelect1">Constraint</label>
+          <select id="constraintSelect1">
+             <option value="none">None</option>
+             <option value="for">For</option>
+             <option value="while">While</option>
+             <option value="print">Print</option>
+          </select>
+          <label for="SearchText1">Keyword</label>
+          <input type="text" id="SearchText1" />
+          <input type="submit" value="Apply Filters" />
+        </form>
+
+        <div class="eForm-table1">
+          <table id="qTable1"></table>
+        </div>
+
+
+
+
+
+      </div>
+  
+
+
+    </div>
+
+    <div id="examCreate" hidden>
+      <div class="create-exam-container">
+        <h2>Create an Exam</h2>
+
+        <h4>Apply Filters</h4>
+        <form id="fForm">
+          <label for="difficultySelect">Difficulty</label>
+          <select id="difficultySelect">
+            <option value="none">None</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+          <label for="categorySelect">Category</label>
+          <select id="categorySelect">
+            <option value="none">None</option>
+            <option value="lists">Lists</option>
+            <option value="turtles">Turtles</option>
+            <option value="if">If</option>
+            <option value="ForLoops">For Loops</option>
+            <option value="Def">Def</option>
+            <option value="While">While</option>
+            <option value="StringMethods">String Methods</option>
+            <option value="Files">Files</option>
+            <option value="Dictionaries">Dictionaries</option>
+            <option value="Namespaces">Namespaces</option>
+            <option value="Exceptions">Exceptions</option>
+            <option value="Classes">Classes</option>
+          </select>
+          <label for="constraintSelect">Constraint</label>
+          <select id="constraintSelect">
+             <option value="none">None</option>
+             <option value="for">For</option>
+             <option value="while">While</option>
+             <option value="print">Print</option>
+          </select>
+          <label for="SearchText">Keyword</label>
+          <input type="text" id="SearchText" />
+          <input type="submit" value="Apply Filters" />
+        </form>
+        <br/>
+        <form id="eForm">
+          <div class="eForm-submit">
+            <div class="eForm-eName">
+              <label for="examName">Exam Name</label>
+              <input type="text" id="examName" />
+              <input type="submit" value="Create" />
+            </div>
+            <div id="selected-questions">
+              <h4>Questions Added</h2>
+            </div>
+            <div>
+              <span id="createExamSubmitText"></span>
+            </div>
+          </div>
+          <div class="eForm-table">
+            <table id="qTable"></table>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="examAssign" hidden>
+      <div class="assign-exam-container">
+        <h2>Assign and Close Exams</h2>
+        <div class="assign-close-container">
+          <form id="assignForm">
+            <div class="assign-close">
+              <input type="submit" value="Assign" />
+              <input type="submit" value="close" />
+            </div>
+            <div class="assign-close-tables">
+              <label for="sTable">Students</label>
+              <table id="sTable"></table>
+              <label for="aTable">Exams</label>
+              <table id="aTable"></table>
+            </div>
+          </form>
+          </div>
+      </div>
+    </div>
+    <div id="gradeExam" hidden>
+      <h2>Grade Exam</h2>
+      <form id="gradeForm">
+        <input type="submit" value="Grade Exam" />
+        <select id="selectBar" type="select"> </select>
+      </form>
+      <form id="updateGrade" hidden class="updateGradeForm">
+        <input type="submit" value="submit Grades" />
+        <p id="updateGradeNotification"></p>
+        <table id="gTable"></table>
+      </form>
+    </div>
+
+    <script src="Professor.js"></script>
+  </body>
+</html>
